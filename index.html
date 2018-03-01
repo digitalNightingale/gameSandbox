@@ -1,26 +1,35 @@
 ﻿
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Poor Dead Bunny</title>
-        	<style>
-
-                #text {
-                 position: absolute;
-                    left: 100px;
-                    top: 70px;
-                    background: transparent
-                }
-                
-            </style>
-        <script type="text/javascript" src="./gameengine.js"></script>
-        <script type="text/javascript" src="./assetmanager.js"></script>
-        <script type="text/javascript" src="./main.js"></script>
-    </head>
-<body><center>
-    <canvas id="text" width="900" height="500"style="border: 1px solid brown;"></canvas>
-    <canvas id="gameWorld" tabindex="1" width="1017" height="654"></canvas>
+<head>
+    <meta charset="utf-8">
+    <title>RUN.</title>
+        <style>
+            canvas {
+                top: 0px;
+                left: 0px;
+                background: transparent;
+            }
+        </style>
+    <title>Game Project Shell</title>
+    <script type="text/javascript" src="./gameengine.js"></script>
+    <script type="text/javascript" src="./assetmanager.js"></script>
+    <script type="text/javascript" src="./main.js"></script>
+    <script type="text/javascript" src="./Background.js"></script>
+    <script type="text/javascript" src="./Enemy.js"></script>
+    <script type="text/javascript" src="./Rabbit.js"></script>
+    <script type="text/javascript" src="./Monster.js"></script>
+    <script type="text/javascript" src="./Pickups.js"></script>
+    <script type="text/javascript" src="./Platform.js"></script>
+    <script type="text/javascript" src="./Scoring.js"></script>
+    <script type="text/javascript" src="./Bounding.js"></script>
+    <script type="text/javascript" src="./DeadBunny.js"></script>
+</head>
+<body>
+    <script type="text/javascript">initialize();</script>
+    <script type="text/javascript">bonus();</script>
+    <script type="text/javascript">backup();</script>
+    <script type="text/javascript">restore();</script>
+    <canvas id="gameWorld" tabindex="1" width="1018" height="654"></canvas>
 </body>
-</center>
 </html>
