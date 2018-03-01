@@ -2,7 +2,8 @@
  * Rabbit *
  **********/
 
-function Bunny(game, ctx, spriteSheet, monster, score) {
+function Bunny(game, ctx, spriteSheet, monster, score, black) {
+    this.black = black;
     this.monster = monster;
     this.game = game;
     this.ctx = ctx;
@@ -28,6 +29,8 @@ Bunny.prototype.constructor = Bunny;
 
 Bunny.prototype.update = function () {
     if (this.game.running) {
+        this.black.x = 1585;
+        this.black.y = -970 + this.y;
         if (this.game.space) this.jumping = true;
         if (this.jumping) {
             if (this.jumpAnimation.isDone()) {
@@ -145,11 +148,7 @@ Bunny.prototype.collide = function() {
                         // this.game.entities[12].x = 1000;
                         // this.game.entities[11].x = 1015;
                         // this.game.entities[10].x = 950;
-                        this.game.entities.splice(12, 1);
-                        this.game.entities.splice(11, 1);
-                        this.game.entities.splice(10, 1);
-                        backup(this.game, this.ctx);
-                        bonus(this.game, this.ctx);
+                        bonus(this.game, this.ctx);                        
                     }
                     if (this.game.entities[i].name === "end") {
                         restore(this.game, this.ctx);

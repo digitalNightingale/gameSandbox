@@ -63,6 +63,9 @@ Background.prototype.draw = function () {
         this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
         this.game.entities[this.game.entities.length - 2].removeFromWorld = true;
         this.game.entities[this.game.entities.length - 3].removeFromWorld = true;
+        this.game.entities[this.game.entities.length - 4].removeFromWorld = true;
+        this.game.entities[this.game.entities.length - 7].removeFromWorld = true;
+        this.game.hard = false;
     }    
     //Start Game Hard
     if (this.game.click.x >= 515 && this.game.click.y >= 307 && this.game.click.x <= 700 && this.game.click.y <= 386 && !this.game.running && this.screen === "main") {
@@ -71,19 +74,47 @@ Background.prototype.draw = function () {
         this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
         this.game.entities[this.game.entities.length - 2].removeFromWorld = true;
         this.game.entities[this.game.entities.length - 3].removeFromWorld = true;
+        this.game.entities[this.game.entities.length - 4].removeFromWorld = true;
+        this.game.hard = true;
     }   
     //Tutorial
     if (this.game.click.x >= 320 && this.game.click.y >= 400 && this.game.click.x <= 505 && this.game.click.y <= 475 && !this.game.running && this.screen === "main") {
-        this.screen = "tut";
+        this.screen = "tut1";
         this.game.main = this.game.entities[this.game.entities.length - 1];
         this.game.highscore = this.game.entities[this.game.entities.length - 2];
         this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
-        this.game.entities[this.game.entities.length - 2].removeFromWorld = true;
+        this.game.entities[this.game.entities.length - 2].removeFromWorld = true;   
     }
-    //Back to Menu from Tutorial
-    if (this.game.click.x >= 43 && this.game.click.y >= 555 && this.game.click.x <= 195 && this.game.click.y <= 632 && this.game.main && this.screen === "tut") {
+    //Tutorial page 2
+    if (this.game.click.x >= 690 && this.game.click.y >= 475 && this.game.click.x <= 737 && this.game.click.y <= 513 && !this.game.running && this.screen === "tut1") {
+        this.screen = "tut2";
+        this.game.tutorial = this.game.entities[this.game.entities.length - 1];
+        this.game.entities[this.game.entities.length - 1].removeFromWorld = true;
+    }
+    //Back to tutorial 1
+    if (this.game.click.x >= 334 && this.game.click.y >= 465 && this.game.click.x <= 378 && this.game.click.y <= 504 && this.game.tutorial && this.screen === "tut2") {
+        var tutorial = new Background(this.game, this.ctx, this.game.tutorial.spritesheet, this.game.tutorial.speed, this.game.tutorial.pause, this.game.tutorial.visible);
+        this.game.addEntity(tutorial);
+        this.game.tutorial = null;
+        this.screen = "tut1";
+    }
+    //Back to menu from tutorial 2
+    if (this.game.click.x >= 43 && this.game.click.y >= 555 && this.game.click.x <= 195 && this.game.click.y <= 632 && this.game.main && this.screen === "tut2") {
         var main = new Background(this.game, this.ctx, this.game.main.spritesheet, this.game.main.speed, this.game.main.pause, this.game.main.visible);
         var highscore = new Background(this.game, this.ctx, this.game.highscore.spritesheet, this.game.highscore.speed, this.game.highscore.pause, this.game.highscore.visible);
+        var tutorial = new Background(this.game, this.ctx, this.game.tutorial.spritesheet, this.game.tutorial.speed, this.game.tutorial.pause, this.game.tutorial.visible);
+        this.game.addEntity(tutorial);
+        this.game.addEntity(highscore);
+        this.game.addEntity(main);
+        this.game.main = null;
+        this.game.highscore = null;
+        this.screen = "main";
+    }
+    //Back to Menu from Tutorial
+    if (this.game.click.x >= 43 && this.game.click.y >= 555 && this.game.click.x <= 195 && this.game.click.y <= 632 && this.game.main && this.screen === "tut1") {
+        var main = new Background(this.game, this.ctx, this.game.main.spritesheet, this.game.main.speed, this.game.main.pause, this.game.main.visible);
+        var highscore = new Background(this.game, this.ctx, this.game.highscore.spritesheet, this.game.highscore.speed, this.game.highscore.pause, this.game.highscore.visible);
+
         this.game.addEntity(highscore);
         this.game.addEntity(main);
         this.game.main = null;
@@ -91,7 +122,7 @@ Background.prototype.draw = function () {
         this.screen = "main";
     }
     //HighScore
-    if (this.game.click.x >= 516 && this.game.click.y >= 400 && this.game.click.x <= 600 && this.game.click.y <= 475 && !this.game.running && this.screen === "main") {
+    if (this.game.click.x >= 516 && this.game.click.y >= 400 && this.game.click.x <= 700 && this.game.click.y <= 475 && !this.game.running && this.screen === "main") {
         this.screen = "high";
         this.game.main = this.game.entities[this.game.entities.length - 1];
         this.game.entities[this.game.entities.length - 1].removeFromWorld = true;

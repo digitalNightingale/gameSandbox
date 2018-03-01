@@ -157,8 +157,10 @@ ASSET_MANAGER.queueDownload("./imgs/Pickups/carrot.png");
 ASSET_MANAGER.queueDownload("./imgs/Pickups/mushroom.png");
 
 //Background
+ASSET_MANAGER.queueDownload("./imgs/Background/black_vignette.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/cave.png");
-ASSET_MANAGER.queueDownload("./imgs/Background/tutorial.png");
+ASSET_MANAGER.queueDownload("./imgs/Background/tutorial_1.png");
+ASSET_MANAGER.queueDownload("./imgs/Background/tutorial_2.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/temp_pause.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/start_game_bg.png");
 ASSET_MANAGER.queueDownload("./imgs/Background/highscore.png");
@@ -210,9 +212,6 @@ function initialize (gameEngine, ctx) {
     var wraith = new Monster(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Monster/wraith.png"), 360, 0, 88.3, 105, .15, 4, true, true, 2, -88.3 * 2, 330);
     //var mist = new Monster(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Monster/knight.png"), 800, 105, 104, 105, .15, 6, true, true, 2, -120, 330);
 
-    //Rabbits
-    var bunny = new Bunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/Rev_Bunny.png"), wraith, score); 
-
     //Pickups
     var mushroom = new Pickup(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Pickups/mushroom.png"), .5, .5, 33, 33, .15, 2, true, true, 1.8, 1, 1000, 505, "mush"); //300
     var carrot = new Pickup(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Pickups/carrot.png"), 0, 0, 39, 62, .15, 5, true, true, 2, 1, 1100, 475, "car");
@@ -225,10 +224,12 @@ function initialize (gameEngine, ctx) {
     var snake = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snake.png"), 0, 0, 95, 87, 0.15, 12, true, true, 4, 1, "walk", 1500, 450);
 
     //Background
+    var vignette = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/black_vignette.png"), 0);
     var cave = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/cave.png"), 4);
     var pause_back = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/temp_pause.png"), 0, pause);
     var start = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/start_game_bg.png"), 0);
-    var tutorial = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tutorial.png"), 0);
+    var tutorial = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tutorial_1.png"), 0);
+    var tutorial2 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tutorial_2.png"), 0);
     var highscore = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/highscore.png"), 0);
     var back1 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_5.png"), 0);
     var back2 = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Background/tree_layer_4.png"), .5);
@@ -239,9 +240,9 @@ function initialize (gameEngine, ctx) {
 
     //Platforms
     //game, ctx, spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse, speed, scale, x, y) {
-    var hole = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/hole_portal.png"), 0, 0, 85, 41, 0.15, 1, true, false, 1.2, 1, 700, 510, "bonus");
-    var sign = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sign.png"), 0, 0, 63, 93, 0.15, 1, true, false, 1.2, 1, 715, 425);
-    var snail = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snail.png"), 0, 0, 45, 36, 0.15, 4, true, true, 2.4, 0.7, "walk", 650, 500, "snail");
+    var hole = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/hole_portal.png"), 0, 0, 85, 41, 0.15, 1, true, false, 1.2, 1, 4000, 510, "bonus");
+    var sign = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sign.png"), 0, 0, 63, 93, 0.15, 1, true, false, 1.2, 1, 4015, 425);
+    var snail = new Enemy(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Enemies/snail.png"), 0, 0, 45, 36, 0.15, 4, true, true, 2.4, 0.7, "walk", 3950, 500, "snail");
 
     var sstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/sm_stump.png"), 50, 56, 90, 112, 0.15, 1, true, false, 1.5, 1, 1800, 420, "stump"); //move= 1 //460 = up/down
     var mstump = new Platform(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/med_stump.png"), 172.5, 132, 100, 153, 0.15, 1, true, false, 1.5, 1, 2100, 380, "stump");
@@ -250,6 +251,9 @@ function initialize (gameEngine, ctx) {
     //Game Over
     var death = new Background(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Gameover/deathBackground.png"), 0);
     var corpse = new DeadBunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Gameover/deadBunny.png"));
+
+    //Rabbits
+    var bunny = new Bunny(gameEngine, ctx, ASSET_MANAGER.getAsset("./imgs/Rabbit/Rev_Bunny.png"), wraith, score, vignette); 
 
     //gameEngine.addEntity(pause_back);
     gameEngine.addEntity(pause_back);
@@ -293,6 +297,7 @@ function initialize (gameEngine, ctx) {
 
     
     gameEngine.addEntity(bunny);
+    gameEngine.addEntity(vignette);
     gameEngine.addEntity(score);
 
     /********************************************************************* 
@@ -300,13 +305,21 @@ function initialize (gameEngine, ctx) {
     **********************************************************************/
     
     gameEngine.addEntity(pause);
+    gameEngine.addEntity(tutorial2);
     gameEngine.addEntity(tutorial);
     gameEngine.addEntity(highscore);
     gameEngine.addEntity(start);
 }
 
 function bonus (game, ctx) {
-    for (var i = 4; i < game.entities.length - 3; i++) {
+    // game.entities[10].x = 4000;
+    // game.entities[10].x = 4015;
+    // game.entities[10].x = 3950;
+    game.entities.splice(10, 1);
+    game.entities.splice(10, 1);
+    game.entities.splice(10, 1);
+    backup(game, ctx);
+    for (var i = 4; i < 21; i++) {
         game.entities[i].removeFromWorld = true;
     }
     var portal = new Platform(game, ctx, ASSET_MANAGER.getAsset("./imgs/Platforms/portal.png"), 0, 0, 200, 367, 0.15, 1, true, false, 1.2, 1, 2000, 300, "end")

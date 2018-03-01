@@ -26,6 +26,7 @@ function Platform(game, ctx, spriteSheet, startX, startY, frameWidth, frameHeigh
     this.boundingBox = {x: frameWidth, y: frameHeight};
     this.animation = new Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse);
     this.x = x;
+    this.initialX = this.x;
     this.y = y;
     this.name = name;
     this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth, this.frameHeight);
@@ -39,6 +40,7 @@ Platform.prototype.update = function () {
     if (this.game.running) {
         this.x -= this.game.clockTick * this.speed * 200;
         if (this.x < -120) {
+            this.x = this.initialX - 120;
         }
         this.boundingBox = new BoundingBox(this.x, this.y, this.frameWidth, this.frameHeight);
         Entity.prototype.update.call(this);
